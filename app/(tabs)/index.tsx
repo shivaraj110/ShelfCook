@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { BackgroundWrapper } from "@/app/components/BackgroundWrapper";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { SignedOut, useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
@@ -111,6 +111,7 @@ const RECIPES = [
 export default function Home() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const { user } = useUser();
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -147,22 +148,29 @@ export default function Home() {
           </View>
         </View>
       </SignedOut>
-      <ScrollView className="flex-1">
+      <ScrollView
+        ref={scrollViewRef}
+        className="flex-1"
+        contentContainerStyle={{ paddingBottom: 100 }}
+      >
         <View className="px-4 pt-12 pb-6">
-          <Text className="text-white text-2xl font-bold mb-2">
+          <Text className="text-black  text-2xl font-bold mb-2">
             Hello, {user?.firstName || "Chef"}! 👋
           </Text>
-          <Text className="text-gray-300 text-base mb-6">
+          <Text className="text-gray-800 font-semibold text-base mb-6">
             What are you cooking today?
           </Text>
 
           {/* Recipe Cards */}
-          <View className="gap-y-6">
+          <View className="gap-y-4">
             {RECIPES.map((recipe) => (
               <TouchableOpacity
                 key={recipe.id}
                 onPress={() => toggleExpand(recipe.id)}
-                className="bg-gray-950/75 backdrop-blur-md  rounded-2xl overflow-hidden"
+                activeOpacity={0.9}
+                className={`bg-gray-950/75 backdrop-blur-md rounded-2xl overflow-hidden ${
+                  expandedId === recipe.id ? "mb-6" : ""
+                }`}
               >
                 {/* Card Header */}
                 <View className="p-4">
@@ -176,7 +184,7 @@ export default function Home() {
                       </Text>
                     </View>
                     {recipe.vegan && (
-                      <View className="bg-green-500/70 px-2 py-1 rounded-2xl">
+                      <View className="bg-green-500/60 px-2 py-1 rounded-[24px] ml-2">
                         <Text className="text-green-500 text-xs font-medium">
                           Vegan
                         </Text>
@@ -187,13 +195,8 @@ export default function Home() {
                   {/* Quick Info */}
                   <View className="flex-row items-center gap-x-4">
                     <View className="flex-row items-center">
-                      <Ionicons
-                        name="time-outline"
-                        className="text-blue-400"
-                        size={16}
-                        color="#9CA3AF"
-                      />
-                      <Text className="text-red-400 text-sm ml-1">
+                      <Ionicons name="time-outline" size={16} color="#9CA3AF" />
+                      <Text className="text-orange-400 text-sm ml-1">
                         {recipe.estimatedTime}
                       </Text>
                     </View>
@@ -203,7 +206,7 @@ export default function Home() {
                         size={16}
                         color="#9CA3AF"
                       />
-                      <Text className="text-red-400 text-sm ml-1">
+                      <Text className="text-orange-400 text-sm ml-1">
                         {recipe.calories} cal
                       </Text>
                     </View>
@@ -213,28 +216,41 @@ export default function Home() {
                         size={16}
                         color="#9CA3AF"
                       />
-                      <Text className="text-red-400 text-sm ml-1">
+                      <Text className="text-orange-400 text-sm ml-1">
                         Serves {recipe.servings}
                       </Text>
                     </View>
+                  </View>
+
+                  {/* Expand/Collapse Icon */}
+                  <View className="absolute right-4 bottom-4">
+                    <Ionicons
+                      name={
+                        expandedId === recipe.id ? "chevron-up" : "chevron-down"
+                      }
+                      size={20}
+                      color="#9CA3AF"
+                    />
                   </View>
                 </View>
 
                 {/* Expanded Content */}
                 {expandedId === recipe.id && (
-                  <View className="px-4 pb-4 bg-gray-950/70">
-                    <View className="h-px my-3" />
+                  <View className="p-4 bg-black/50">
+                    <View className="h-px bg-gray-800 mb-4" />
 
                     {/* Categories */}
                     <ScrollView
                       horizontal
                       showsHorizontalScrollIndicator={false}
-                      className="mb-4"
+                      className="mb-4 -mx-4 px-4"
                     >
-                      {recipe.categories.map((category) => (
+                      {recipe.categories.map((category, index) => (
                         <View
                           key={category}
-                          className="bg-white/70 px-3 py-1 rounded-full mr-2"
+                          className={`bg-white/10 px-3 py-1 rounded-full ${
+                            index !== recipe.categories.length - 1 ? "mr-2" : ""
+                          }`}
                         >
                           <Text className="text-white text-xs">{category}</Text>
                         </View>
@@ -242,14 +258,14 @@ export default function Home() {
                     </ScrollView>
 
                     {/* Nutritional Info */}
-                    <View className="flex-row justify-between mb-4 bg-white/70 p-3 rounded-xl">
+                    <View className="flex-row justify-between mb-6 bg-white/10 p-3 rounded-xl">
                       {Object.entries(recipe.nutritionalInfo).map(
                         ([key, value]) => (
-                          <View key={key} className="items-center">
+                          <View key={key} className="items-center px-2">
                             <Text className="text-white text-sm font-semibold">
                               {value}
                             </Text>
-                            <Text className="text-gray-400 text-xs capitalize">
+                            <Text className="text-orange-400 text-xs capitalize">
                               {key}
                             </Text>
                           </View>
@@ -258,17 +274,14 @@ export default function Home() {
                     </View>
 
                     {/* Ingredients */}
-                    <Text className="text-white text-lg font-semibold mb-2">
+                    <Text className="text-white text-lg font-semibold mb-3">
                       Ingredients
                     </Text>
-                    <View className="mb-4">
+                    <View className="mb-6 space-y-2">
                       {recipe.ingredients.map((ingredient, index) => (
-                        <View
-                          key={index}
-                          className="flex-row items-center mb-2"
-                        >
-                          <View className="w-2 h-2 rounded-full bg-white/70 mr-2" />
-                          <Text className="text-gray-300 text-sm">
+                        <View key={index} className="flex-row items-center">
+                          <View className="w-2 h-2 rounded-full bg-white/30 mr-3 mt-1" />
+                          <Text className="text-gray-300 text-sm flex-1">
                             {ingredient}
                           </Text>
                         </View>
@@ -276,10 +289,10 @@ export default function Home() {
                     </View>
 
                     {/* Procedure */}
-                    <Text className="text-white text-lg font-semibold mb-2">
+                    <Text className="text-white text-lg font-semibold mb-3">
                       Procedure
                     </Text>
-                    <Text className="text-gray-300 text-sm">
+                    <Text className="text-gray-300 text-sm leading-6">
                       {recipe.procedure}
                     </Text>
                   </View>
@@ -292,6 +305,7 @@ export default function Home() {
     </BackgroundWrapper>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

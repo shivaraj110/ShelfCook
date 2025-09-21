@@ -1,6 +1,7 @@
 import { Stack, Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
+import { View } from "react-native";
 
 export default function TabLayout() {
   return (
@@ -9,19 +10,39 @@ export default function TabLayout() {
         <Tabs
           initialRouteName="index"
           screenOptions={{
-            tabBarStyle: { height: 75 }, // Default height is ~59px, reducing by 15%
-            tabBarIconStyle: { marginTop: 6 },
+            tabBarStyle: {
+              height: 100,
+              backgroundColor: "#0F172A",
+              borderTopWidth: 0,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+            tabBarItemStyle: {
+              paddingVertical: 8,
+            },
             tabBarShowLabel: false,
             tabBarActiveTintColor: "#FF6666",
+            tabBarInactiveTintColor: "#64748B",
             headerShown: false,
+            tabBarBackground: () => (
+              <View className="absolute inset-0 bg-gray-900/95 backdrop-blur-lg"></View>
+            ),
           }}
         >
           <Tabs.Screen
             name="index"
             options={{
               title: "Home",
-              tabBarIcon: ({ color }) => (
-                <Ionicons name="home" size={24} color={color} />
+              tabBarIcon: ({ color, focused }) => (
+                <Ionicons
+                  name={focused ? "home" : "home-outline"}
+                  size={24}
+                  color={color}
+                />
               ),
             }}
           />
@@ -29,8 +50,12 @@ export default function TabLayout() {
             name="explore"
             options={{
               title: "Explore",
-              tabBarIcon: ({ color }) => (
-                <Ionicons name="compass" size={24} color={color} />
+              tabBarIcon: ({ color, focused }) => (
+                <Ionicons
+                  name={focused ? "compass" : "compass-outline"}
+                  size={24}
+                  color={color}
+                />
               ),
             }}
           />
@@ -38,18 +63,25 @@ export default function TabLayout() {
             name="scan"
             options={{
               title: "Scan",
-              tabBarIcon: ({ color }) => (
-                <Ionicons name="scan" size={24} color={color} />
+              tabBarIcon: ({ color, focused }) => (
+                <Ionicons
+                  name={focused ? "scan-circle" : "scan-circle-outline"}
+                  size={32}
+                  color={color}
+                />
               ),
             }}
           />
-
           <Tabs.Screen
             name="profile"
             options={{
               title: "Profile",
-              tabBarIcon: ({ color }) => (
-                <Ionicons name="person" size={24} color={color} />
+              tabBarIcon: ({ color, focused }) => (
+                <Ionicons
+                  name={focused ? "person" : "person-outline"}
+                  size={24}
+                  color={color}
+                />
               ),
             }}
           />
