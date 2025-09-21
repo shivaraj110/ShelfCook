@@ -105,7 +105,7 @@ export default function Signup() {
       <View
         className={`flex-1 ${iskeyBoardVisible ? "justify-center" : "justify-end"}  items-center  w-[100%]`}
       >
-        <View className="bg-white/75 rounded-3xl w-full p-6 shadow-lg">
+        <View className="bg-white/75 rounded-t-[26px] w-full p-6 shadow-lg">
           <Text className="text-2xl font-bold text-center mb-6">
             Create Your Account
           </Text>
