@@ -30,7 +30,10 @@ export default function Page() {
             </View>
             <View style={styles.buttons}>
               <Link href="./(auth)/login" asChild>
-                <TouchableOpacity style={styles.primaryButton}>
+                <TouchableOpacity
+                  style={styles.primaryButton}
+                  className="w-[350px]"
+                >
                   <Text style={styles.primaryButtonText}>Login</Text>
                 </TouchableOpacity>
               </Link>
