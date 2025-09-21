@@ -1,20 +1,20 @@
 // app/Signup.tsx
 import { ensureJwt } from "@/services/ensureJwt";
-import { getClerkInstance, useSignUp } from "@clerk/clerk-expo";
-import { useRouter } from "expo-router";
+
 import { useState } from "react";
+import { getClerkInstance, useSignUp } from "@clerk/clerk-expo";
+import { router } from "expo-router";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { BackgroundWrapper } from "../components/BackgroundWrapper";
 import useKeyboardState from "../hooks/useKeyboardState";
 
 export default function Signup() {
-  const router = useRouter();
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
   });
-
+  const iskeyBoardVisible = useKeyboardState();
   const { isLoaded, signUp, setActive } = useSignUp();
 
   const [pendingVerification, setPendingVerification] = useState(false);
@@ -103,7 +103,7 @@ export default function Signup() {
   return (
     <BackgroundWrapper>
       <View
-        className={`flex-1 ${useKeyboardState() ? "justify-center" : "justify-end"}  items-center  w-[100%]`}
+        className={`flex-1 ${iskeyBoardVisible ? "justify-center" : "justify-end"}  items-center  w-[100%]`}
       >
         <View className="bg-white/75 rounded-3xl w-full p-6 shadow-lg">
           <Text className="text-2xl font-bold text-center mb-6">
@@ -144,7 +144,7 @@ export default function Signup() {
             Already have an account?{" "}
             <Text
               className="text-blue-700 font-semibold"
-              onPress={() => router.push("/(auth)/login")}
+              onPress={() => router.navigate("/(auth)/login")}
             >
               Log in
             </Text>
