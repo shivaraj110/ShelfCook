@@ -9,7 +9,7 @@ export default function TabLayout() {
         <Tabs
           initialRouteName="index"
           screenOptions={{
-            tabBarStyle: { height: 40, borderRadius: 30 }, // Default height is ~59px, reducing by 15%
+            tabBarStyle: { height: 75 }, // Default height is ~59px, reducing by 15%
             tabBarIconStyle: { marginTop: 6 },
             tabBarShowLabel: false,
             tabBarActiveTintColor: "#FF6666",
