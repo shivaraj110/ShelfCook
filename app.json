@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "newLogin",
-    "slug": "newLogin",
+    "name": "ShelfCook",
+    "slug": "ShelfCook",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
