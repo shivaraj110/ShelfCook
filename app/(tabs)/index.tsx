@@ -8,7 +8,7 @@ import {
 import { BackgroundWrapper } from "@/app/components/BackgroundWrapper";
 import { useState, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { SignedOut, useUser } from "@clerk/clerk-expo";
+import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
 
 const mealTypes = [
@@ -40,7 +40,7 @@ const RECIPES: Recipe[] = [
   {
     id: 1,
     recipeName: "Sada Dosa",
-    servings: "Makes 15",
+    servings: "15",
     description:
       "A savory rice crepe, also known as dosa, made with parboiled rice, urad dhal, and fenugreek seeds.",
     ingredients: [
@@ -54,8 +54,8 @@ const RECIPES: Recipe[] = [
     ],
     procedure:
       "1. Soak the rice and the dhal together with the fenugreek seeds for 7-8 hours. 2. Drain and grind the mixture to a grainy paste. 3. Add bicarbonate of soda and salt. Mix well. 4. Set aside to ferment for 8-10 hours. 5. Add the yoghurt to make the batter. This batter should be thick enough to coat a spoon. Add a little water if needed. Set aside. 6. Grease and heat a flat pan. Spread a spoonful of the batter over it to make a thin crêpe. Pour 1 tsp oil on top. Cook until crisp. Repeat for the rest of the batter and serve hot.",
-    estimatedTime: "20 minutes (plus soaking and fermentation time)",
-    calories: "Approx. 80-100 per dosa",
+    estimatedTime: "20 minutes ",
+    calories: " 80-100",
     nutritionalInfo: {
       protein: "2g",
       carbohydrates: "12g",
@@ -67,7 +67,7 @@ const RECIPES: Recipe[] = [
   {
     id: 2,
     recipeName: "Potato Samosa",
-    servings: "Makes 20",
+    servings: "20",
     description:
       "A classic Indian snack made with a flaky pastry filled with spiced potatoes, ginger, chilies, and coriander.",
     ingredients: [
@@ -91,7 +91,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Mix the flour with the salt, 2 tbsp oil and water. Knead into a pliable dough. 2. Cover with a moist cloth and set aside for 15-20 minutes. 3. Knead the dough again. Cover with a moist cloth and set aside. 4. For the filling, heat 3 tbsp oil in a frying pan. Add the ginger, green chillies, garlic and ground coriander. Fry for a minute on a medium heat, stirring continuously. 5. Add the onion and fry till brown. 6. Add the potatoes, coriander leaves, lemon juice, turmeric, chilli powder, garam masala and salt. Mix thoroughly. 7. Cook on a low heat for 4 minutes, stirring occasionally. Set aside. 8. To make the samosas, divide the dough into 10 balls. Roll out into discs of 12cm/5in diameter. Cut each disc into 2 half-moons. 9. Run a moist finger along the diameter of a half-moon. Bring the ends together to make a cone. 10. Place a tbsp of the filling in the cone and seal by pressing the edges together. Repeat for all the half-moons. 11. Heat the oil in a frying pan. Deep fry the samosas, five at a time, over a low heat till light brown. Drain on absorbent paper. 12. Serve hot with mint chutney (see here).",
     estimatedTime: "60 minutes",
-    calories: "Approx. 180-220 per samosa",
+    calories: " 180-220",
     nutritionalInfo: {
       protein: "3g",
       carbohydrates: "20g",
@@ -103,7 +103,7 @@ const RECIPES: Recipe[] = [
   {
     id: 3,
     recipeName: "Hot Kachori",
-    servings: "Makes 15",
+    servings: " 15",
     description:
       "A fried dumpling filled with lentil filling, seasoned with coriander, fennel, cumin, and other spices.",
     ingredients: [
@@ -123,7 +123,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Mix 250g/9oz flour with 3 tbsp oil, salt and 100ml/3½fl oz of the water. Knead into a soft, pliable dough. Set aside for 30 minutes. 2. To make the filling, cook the dhal with the remaining water in a saucepan on a medium heat for 45 minutes. Drain and set aside. 3. Heat 2 tbsp oil in a saucepan. When it begins to smoke, add the ground coriander, fennel, cumin seeds, mustard seeds, asafoetida, garam masala, chilli powder and salt. Let them splutter for 30 seconds. 4. Add the cooked dhal. Mix well and fry for 2-3 minutes, stirring continuously. 5. Cool the dhal mixture and divide into 15 lemon-sized balls. Set aside. 6. Mix 1 tbsp flour with 1 tbsp water to make a paste for patching. Set aside. 7. Divide the dough into 15 balls. Roll out into discs of 12cm/5in diameter. 8. Place 1 ball of the filling in the centre of a disc. Seal like a pouch. Flatten slightly by pressing it between the palms. Repeat for the remaining discs. 9. Heat the oil in a saucepan until it starts smoking. Deep fry the discs till golden brown on the underside. Flip and repeat. 10. If a kachori tears while frying, seal it with the patching paste. 11. Drain on absorbent paper. Serve hot with mint chutney (see here).",
     estimatedTime: "90 minutes",
-    calories: "Approx. 200-250 per kachori",
+    calories: " 200-250",
     nutritionalInfo: {
       protein: "8g",
       carbohydrates: "30g",
@@ -135,7 +135,7 @@ const RECIPES: Recipe[] = [
   {
     id: 4,
     recipeName: "Khandvi",
-    servings: "Makes 10-15",
+    servings: " 10-15",
     description:
       "A Gujurati snack made with besan (gram flour) and yogurt, rolled up and seasoned with mustard seeds, coconut, and coriander.",
     ingredients: [
@@ -156,7 +156,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Mix the besan, yoghurt, water, turmeric and salt together. 2. Heat 4 tbsp oil in a frying pan. Add the besan mixture and cook, stirring continuously to make sure no lumps are formed. 3. Cook till the mixture leaves the sides of the pan. Set aside. 4. Grease two 15 × 35cm/6 × 14in non-stick baking trays. Pour in the besan mixture and smooth flat with a palette knife. Allow to set for 10 minutes. 5. Cut the mixture into 5cm/2in wide strips. Carefully roll up each strip. 6. Place the rolls in a serving dish. Sprinkle the grated coconut and coriander leaves on top. Set aside. 7. Heat 1 tbsp oil in a small saucepan. Add the mustard seeds, asafoetida, curry leaves, green chillies and sesame seeds. Let them splutter for 15 seconds. 8. Pour this immediately over the besan rolls. Serve hot or at room temperature.",
     estimatedTime: "30 minutes",
-    calories: "Approx. 70-90 per roll",
+    calories: " 70-90 per roll",
     nutritionalInfo: {
       protein: "2g",
       carbohydrates: "8g",
@@ -168,7 +168,7 @@ const RECIPES: Recipe[] = [
   {
     id: 5,
     recipeName: "Makkai Squares",
-    servings: "Makes 12",
+    servings: " 12",
     description:
       "Corn squares filled with a mixture of ground corn kernels and mashed peas, seasoned with green chilies and coriander.",
     ingredients: [
@@ -190,7 +190,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Heat the ghee in a saucepan. When it begins to smoke, fry the corn for 3 minutes. Set aside. 2. Add salt to the boiled peas. Mash the peas well. Set aside. 3. Heat 2 tbsp oil in a frying pan. Add the green chillies, cumin and mustard seeds. Let them splutter for 15 seconds. 4. Add the fried corn, mashed peas, garlic paste, ground coriander and ground cumin. Mix well. Remove from the heat and set aside. 5. Mix both the flours together. Add salt and 1 tbsp oil. Add the water and knead into a soft dough. 6. Roll out 24 square shapes, each square 10x10cm/4x4in in size. 7. Place the corn and peas mixture in the centre of a square and cover with another square. Gently press the edges of the square to seal. 8. Repeat for the rest of the squares. 9. Grease and heat a frying pan. Roast the squares on the pan till golden brown. 10. Serve hot with ketchup.",
     estimatedTime: "60 minutes",
-    calories: "Approx. 120-150 per square",
+    calories: " 120-150 per square",
     nutritionalInfo: {
       protein: "4g",
       carbohydrates: "20g",
@@ -222,7 +222,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Soak the chana dhal for 4 hours. Drain and set aside. 2. Heat the oil in a saucepan. Add the cumin seeds. Let them splutter for 15 seconds. 3. Add the soaked dhal, water, salt and turmeric. Simmer for 30 minutes. 4. Transfer to a serving dish. Sprinkle with the amchoor and coriander leaves. Set aside. 5. Knead all the pakwan ingredients, except the oil, with enough water to make a stiff dough. 6. Divide into walnut-sized balls. Roll out into thick discs, 10cm/4in in diameter. Pierce all over with a fork. 7. Heat the oil in a frying pan. Deep fry the discs till golden. Drain on absorbent paper. 8. Serve the pakwans with the hot dhal.",
     estimatedTime: "90 minutes (plus soaking time)",
-    calories: "Approx. 350-400 per serving",
+    calories: " 350-400 per serving",
     nutritionalInfo: {
       protein: "15g",
       carbohydrates: "50g",
@@ -248,7 +248,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Knead the besan with the ajowan seeds, oil, asafoetida, salt and water into a sticky dough. 2. Put the dough in a piping bag. 3. Heat the oil in a saucepan. Press the dough through the nozzle in the form of noodles into the pan and fry lightly on both sides. 4. Drain well and cool before storing. NOTE: This can be stored for a fortnight.",
     estimatedTime: "45 minutes",
-    calories: "Approx. 250-300 per serving",
+    calories: " 250-300 per serving",
     nutritionalInfo: {
       protein: "10g",
       carbohydrates: "30g",
@@ -299,188 +299,199 @@ export default function Home() {
           </View>
         </View>
       </SignedOut>
-
-      <ScrollView
-        ref={scrollViewRef}
-        className="bg-gray-950/90
+      <SignedIn>
+        <ScrollView
+          ref={scrollViewRef}
+          className="bg-gray-950/90
 flex-1  "
-        contentContainerStyle={{ paddingBottom: 100 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View className="px-4 pt-12">
-          {/* Header */}
-          <View>
-            <Text className="text-white text-2xl font-semibold mb-2">
-              Hello, {user?.firstName || "Chef"}! 👋
-            </Text>
-            <Text className="text-gray-400 text-base mb-6">
-              What would you like to cook today?
-            </Text>
-          </View>
+          contentContainerStyle={{ paddingBottom: 100 }}
+          showsVerticalScrollIndicator={false}
+        >
+          <View className="px-4 pt-12">
+            {/* Header */}
+            <View>
+              <Text className="text-white text-2xl font-semibold mb-2">
+                Hello, {user?.firstName || "Chef"}! 👋
+              </Text>
+              <Text className="text-gray-400 text-base mb-6">
+                What would you like to cook today?
+              </Text>
+            </View>
 
-          {/* Quick Meal Type Selection */}
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            className="-mx-4 px-4 mb-6"
-          >
-            {mealTypes.map((type, index) => (
-              <TouchableOpacity
-                key={type.label}
-                className={`bg-white/5 backdrop-blur-md rounded-2xl p-3 w-24 items-center ${
-                  index !== mealTypes.length - 1 ? "mr-3" : ""
-                }`}
-                activeOpacity={0.7}
-              >
-                <View className="bg-white/10 p-2 rounded-full mb-2">
-                  <Ionicons name={type.icon} size={20} color="white" />
-                </View>
-                <Text className="text-white text-xs">{type.label}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+            {/* Quick Meal Type Selection */}
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              className="-mx-4 px-4 mb-6"
+            >
+              {mealTypes.map((type, index) => (
+                <TouchableOpacity
+                  key={type.label}
+                  className={`bg-white/5 backdrop-blur-md rounded-2xl p-3 w-24 items-center ${
+                    index !== mealTypes.length - 1 ? "mr-3" : ""
+                  }`}
+                  activeOpacity={0.7}
+                >
+                  <View className="bg-white/10 p-2 rounded-full mb-2">
+                    <Ionicons name={type.icon} size={20} color="white" />
+                  </View>
+                  <Text className="text-white text-xs">{type.label}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
 
-          {/* Recipe Cards */}
-          <View className="gap-y-4">
-            {RECIPES.map((recipe) => (
-              <TouchableOpacity
-                key={recipe.id}
-                onPress={() => toggleExpand(recipe.id)}
-                activeOpacity={0.7}
-                className={`bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden ${
-                  expandedId === recipe.id ? "mb-6" : ""
-                }`}
-              >
-                {/* Card Header */}
-                <View className="p-4">
-                  <View className="flex-row justify-between items-start">
-                    <View className="flex-1">
-                      <Text className="text-white text-xl font-semibold mb-2">
-                        {recipe.recipeName}
-                      </Text>
-                      <Text className="text-gray-400 text-sm mb-3">
-                        {recipe.description}
-                      </Text>
-                    </View>
-                    {recipe.vegan && (
-                      <View className="bg-green-500/20 px-3 py-1 rounded-full ml-2">
-                        <Text className="text-green-400 text-xs font-medium">
-                          Vegan
+            {/* Recipe Cards */}
+            <View className="gap-y-4">
+              {RECIPES.map((recipe) => (
+                <TouchableOpacity
+                  key={recipe.id}
+                  onPress={() => toggleExpand(recipe.id)}
+                  activeOpacity={0.7}
+                  className={`bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden ${
+                    expandedId === recipe.id ? "mb-6" : ""
+                  }`}
+                >
+                  {/* Card Header */}
+                  <View className="p-4">
+                    <View className="flex-row justify-between items-start">
+                      <View className="flex-1">
+                        <Text className="text-white text-xl font-semibold mb-2">
+                          {recipe.recipeName}
+                        </Text>
+                        <Text className="text-gray-400 text-sm mb-3">
+                          {recipe.description}
                         </Text>
                       </View>
-                    )}
-                  </View>
-
-                  {/* Quick Info */}
-                  <View className="flex-row items-center space-x-4">
-                    <View className="flex-row items-center">
-                      <Ionicons name="time-outline" size={16} color="#9CA3AF" />
-                      <Text className="text-gray-400 text-sm ml-1">
-                        {recipe.estimatedTime}
-                      </Text>
-                    </View>
-                    <View className="flex-row items-center">
-                      <Ionicons
-                        name="flame-outline"
-                        size={16}
-                        color="#9CA3AF"
-                      />
-                      <Text className="text-gray-400 text-sm ml-1">
-                        {recipe.calories} cal
-                      </Text>
-                    </View>
-                    <View className="flex-row items-center">
-                      <Ionicons
-                        name="people-outline"
-                        size={16}
-                        color="#9CA3AF"
-                      />
-                      <Text className="text-gray-400 text-sm ml-1">
-                        Makes {recipe.servings}
-                      </Text>
-                    </View>
-                  </View>
-
-                  {/* Expand/Collapse Icon */}
-                  <View className="absolute right-4 bottom-4">
-                    <Ionicons
-                      name={
-                        expandedId === recipe.id ? "chevron-up" : "chevron-down"
-                      }
-                      size={20}
-                      color="#9CA3AF"
-                    />
-                  </View>
-                </View>
-
-                {/* Expanded Content */}
-                {expandedId === recipe.id && (
-                  <View className="p-4 bg-white/[0.02]">
-                    <View className="h-px bg-white/10 mb-4" />
-
-                    {/* Categories */}
-                    <ScrollView
-                      horizontal
-                      showsHorizontalScrollIndicator={false}
-                      className="mb-4 -mx-4 px-4"
-                    >
-                      {recipe.categories.map((category, index) => (
-                        <View
-                          key={category}
-                          className={`bg-white/10 px-3 py-1 rounded-full ${
-                            index !== recipe.categories.length - 1 ? "mr-2" : ""
-                          }`}
-                        >
-                          <Text className="text-white text-xs">{category}</Text>
+                      {recipe.vegan && (
+                        <View className="bg-green-500/20 px-3 py-1 rounded-full ml-2">
+                          <Text className="text-green-400 text-xs font-medium">
+                            Vegan
+                          </Text>
                         </View>
-                      ))}
-                    </ScrollView>
-
-                    {/* Nutritional Info */}
-                    <View className="flex-row justify-between mb-6 bg-white/5 p-3 rounded-xl">
-                      {Object.entries(recipe.nutritionalInfo).map(
-                        ([key, value]) => (
-                          <View key={key} className="items-center px-2">
-                            <Text className="text-white text-sm font-semibold">
-                              {value}
-                            </Text>
-                            <Text className="text-gray-400 text-xs capitalize">
-                              {key}
-                            </Text>
-                          </View>
-                        ),
                       )}
                     </View>
 
-                    {/* Ingredients */}
-                    <Text className="text-white text-lg font-semibold mb-3">
-                      Ingredients
-                    </Text>
-                    <View className="mb-6 space-y-2">
-                      {recipe.ingredients.map((ingredient, index) => (
-                        <View key={index} className="flex-row items-center">
-                          <View className="w-2 h-2 rounded-full bg-white/30 mr-3 mt-1" />
-                          <Text className="text-gray-400 text-sm flex-1">
-                            {ingredient}
-                          </Text>
-                        </View>
-                      ))}
+                    {/* Quick Info */}
+                    <View className="flex-row items-center gap-x-4">
+                      <View className="flex-row items-center">
+                        <Ionicons
+                          name="time-outline"
+                          size={16}
+                          color="#9CA3AF"
+                        />
+                        <Text className="text-orange-400 text-sm ml-1">
+                          {recipe.estimatedTime}
+                        </Text>
+                      </View>
+                      <View className="flex-row items-center">
+                        <Ionicons
+                          name="flame-outline"
+                          size={16}
+                          color="#9CA3AF"
+                        />
+                        <Text className="text-orange-400 text-sm ml-1">
+                          {recipe.calories} cal
+                        </Text>
+                      </View>
+                      <View className="flex-row items-center">
+                        <Ionicons
+                          name="people-outline"
+                          size={16}
+                          color="#9CA3AF"
+                        />
+                        <Text className="text-orange-400 text-sm ml-1">
+                          Serves{recipe.servings}
+                        </Text>
+                      </View>
                     </View>
 
-                    {/* Procedure */}
-                    <Text className="text-white text-lg font-semibold mb-3">
-                      Procedure
-                    </Text>
-                    <Text className="text-gray-400 text-sm leading-6">
-                      {recipe.procedure}
-                    </Text>
+                    {/* Expand/Collapse Icon */}
+                    <View className="absolute right-4 bottom-4">
+                      <Ionicons
+                        name={
+                          expandedId === recipe.id
+                            ? "chevron-up"
+                            : "chevron-down"
+                        }
+                        size={20}
+                        color="#9CA3AF"
+                      />
+                    </View>
                   </View>
-                )}
-              </TouchableOpacity>
-            ))}
+
+                  {/* Expanded Content */}
+                  {expandedId === recipe.id && (
+                    <View className="p-4 bg-white/[0.02]">
+                      <View className="h-px bg-white/10 mb-4" />
+
+                      {/* Categories */}
+                      <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        className="mb-4 -mx-4 px-4"
+                      >
+                        {recipe.categories.map((category, index) => (
+                          <View
+                            key={category}
+                            className={`bg-blue-700/60 px-3 py-1 rounded-full ${
+                              index !== recipe.categories.length - 1
+                                ? "mr-2"
+                                : ""
+                            }`}
+                          >
+                            <Text className="text-white text-xs">
+                              {category}
+                            </Text>
+                          </View>
+                        ))}
+                      </ScrollView>
+
+                      {/* Nutritional Info */}
+                      <View className="flex-row justify-between mb-6 bg-white/5 p-3 rounded-xl">
+                        {Object.entries(recipe.nutritionalInfo).map(
+                          ([key, value]) => (
+                            <View key={key} className="items-center px-2">
+                              <Text className="text-white text-sm font-semibold">
+                                {value}
+                              </Text>
+                              <Text className="text-gray-400 text-xs capitalize">
+                                {key}
+                              </Text>
+                            </View>
+                          ),
+                        )}
+                      </View>
+
+                      {/* Ingredients */}
+                      <Text className="text-white text-lg font-semibold mb-3">
+                        Ingredients
+                      </Text>
+                      <View className="mb-6 space-y-2">
+                        {recipe.ingredients.map((ingredient, index) => (
+                          <View key={index} className="flex-row items-center">
+                            <View className="w-2 h-2 rounded-full bg-white/30 mr-3 mt-1" />
+                            <Text className="text-gray-400 text-sm flex-1">
+                              {ingredient}
+                            </Text>
+                          </View>
+                        ))}
+                      </View>
+
+                      {/* Procedure */}
+                      <Text className="text-white text-lg font-semibold mb-3">
+                        Procedure
+                      </Text>
+                      <Text className="text-gray-400 text-sm leading-6">
+                        {recipe.procedure}
+                      </Text>
+                    </View>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </SignedIn>
     </BackgroundWrapper>
   );
 }

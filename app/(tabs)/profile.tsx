@@ -3,7 +3,6 @@ import { BackgroundWrapper } from "@/app/components/BackgroundWrapper";
 import { useUser } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { SignOutButton } from "@/app/components/SignOutButton";
-import { Link } from "expo-router";
 
 export default function Profile() {
   const { user } = useUser();
