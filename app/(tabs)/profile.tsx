@@ -54,7 +54,7 @@ export default function Profile() {
   return (
     <BackgroundWrapper>
       <ScrollView
-        className="flex-1 bg-gray-950/90"
+        className="flex-1 bg-neutral-950/90"
         showsVerticalScrollIndicator={false}
       >
         {/* Profile Header */}
@@ -68,7 +68,7 @@ export default function Profile() {
                 />
               </View>
               <TouchableOpacity
-                className="absolute bottom-0 right-0 bg-white/10 p-1.5 rounded-full backdrop-blur-md"
+                className="absolute bottom-0 right-0 bg-white/15 10 p-1.5 rounded-full backdrop-blur-md"
                 activeOpacity={0.7}
               >
                 <Ionicons name="camera" size={14} color="white" />
@@ -78,11 +78,11 @@ export default function Profile() {
               <Text className="text-white text-xl font-semibold">
                 {user?.fullName}
               </Text>
-              <Text className="text-gray-400 text-sm mt-1">
+              <Text className="text-neutral-400 text-sm mt-1">
                 {user?.primaryEmailAddress?.emailAddress}
               </Text>
               <TouchableOpacity
-                className="mt-3 flex-row items-center bg-white/10 self-start px-4 py-1.5 rounded-full"
+                className="mt-3 flex-row items-center bg-white/15 10 self-start px-4 py-1.5 rounded-full"
                 activeOpacity={0.7}
               >
                 <Text className="text-white text-sm">Edit Profile</Text>
@@ -99,12 +99,12 @@ export default function Profile() {
             {quickLinks.map((link, index) => (
               <TouchableOpacity
                 key={link.label}
-                className={`bg-white/5 backdrop-blur-md rounded-2xl p-3 w-24 items-center ${
+                className={`bg-white/15  backdrop-blur-md rounded-2xl p-3 w-24 items-center ${
                   index !== quickLinks.length - 1 ? "mr-3" : ""
                 }`}
                 activeOpacity={0.7}
               >
-                <View className="bg-white/10 p-2 rounded-full mb-2">
+                <View className="bg-white/15  p-2 rounded-full mb-2">
                   <Ionicons name={link.icon} size={20} color="white" />
                 </View>
                 <Text className="text-white text-xs mb-1">{link.label}</Text>
@@ -113,16 +113,16 @@ export default function Profile() {
           </ScrollView>
 
           {/* Stats */}
-          <View className="flex-row justify-between mt-6 bg-white/5 backdrop-blur-md rounded-2xl p-4">
+          <View className="flex-row justify-between mt-6 bg-white/15  backdrop-blur-md rounded-2xl p-4">
             {stats.map((stat) => (
               <View key={stat.label} className="items-center px-4">
-                <View className="bg-white/10 p-2 rounded-full mb-2">
+                <View className="bg-white/15  p-2 rounded-full mb-2">
                   <Ionicons name={stat.icon} size={20} color="white" />
                 </View>
                 <Text className="text-white text-lg font-semibold">
                   {stat.value}
                 </Text>
-                <Text className="text-gray-400 text-xs">{stat.label}</Text>
+                <Text className="text-neutral-400 text-xs">{stat.label}</Text>
               </View>
             ))}
           </View>
@@ -133,7 +133,7 @@ export default function Profile() {
               <Text className="text-white text-lg font-semibold mb-3 px-1">
                 {section.title}
               </Text>
-              <View className="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden">
+              <View className="bg-white/15  backdrop-blur-md rounded-2xl overflow-hidden">
                 {section.items.map((item, index) => (
                   <TouchableOpacity
                     key={item.label}
@@ -144,12 +144,12 @@ export default function Profile() {
                     }`}
                     activeOpacity={0.7}
                   >
-                    <View className="bg-white/10 p-2 rounded-full">
+                    <View className="bg-white/15  p-2 rounded-full">
                       <Ionicons name={item.icon} size={20} color="white" />
                     </View>
                     <View className="flex-1 ml-3">
                       <Text className="text-white">{item.label}</Text>
-                      <Text className="text-gray-400 text-sm mt-0.5">
+                      <Text className="text-neutral-400 text-sm mt-0.5">
                         {item.value}
                       </Text>
                     </View>

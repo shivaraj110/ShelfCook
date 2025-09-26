@@ -156,7 +156,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Mix the besan, yoghurt, water, turmeric and salt together. 2. Heat 4 tbsp oil in a frying pan. Add the besan mixture and cook, stirring continuously to make sure no lumps are formed. 3. Cook till the mixture leaves the sides of the pan. Set aside. 4. Grease two 15 × 35cm/6 × 14in non-stick baking trays. Pour in the besan mixture and smooth flat with a palette knife. Allow to set for 10 minutes. 5. Cut the mixture into 5cm/2in wide strips. Carefully roll up each strip. 6. Place the rolls in a serving dish. Sprinkle the grated coconut and coriander leaves on top. Set aside. 7. Heat 1 tbsp oil in a small saucepan. Add the mustard seeds, asafoetida, curry leaves, green chillies and sesame seeds. Let them splutter for 15 seconds. 8. Pour this immediately over the besan rolls. Serve hot or at room temperature.",
     estimatedTime: "30 minutes",
-    calories: " 70-90 per roll",
+    calories: " 70-90 ",
     nutritionalInfo: {
       protein: "2g",
       carbohydrates: "8g",
@@ -190,7 +190,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Heat the ghee in a saucepan. When it begins to smoke, fry the corn for 3 minutes. Set aside. 2. Add salt to the boiled peas. Mash the peas well. Set aside. 3. Heat 2 tbsp oil in a frying pan. Add the green chillies, cumin and mustard seeds. Let them splutter for 15 seconds. 4. Add the fried corn, mashed peas, garlic paste, ground coriander and ground cumin. Mix well. Remove from the heat and set aside. 5. Mix both the flours together. Add salt and 1 tbsp oil. Add the water and knead into a soft dough. 6. Roll out 24 square shapes, each square 10x10cm/4x4in in size. 7. Place the corn and peas mixture in the centre of a square and cover with another square. Gently press the edges of the square to seal. 8. Repeat for the rest of the squares. 9. Grease and heat a frying pan. Roast the squares on the pan till golden brown. 10. Serve hot with ketchup.",
     estimatedTime: "60 minutes",
-    calories: " 120-150 per square",
+    calories: " 120-150 ",
     nutritionalInfo: {
       protein: "4g",
       carbohydrates: "20g",
@@ -202,7 +202,7 @@ const RECIPES: Recipe[] = [
   {
     id: 6,
     recipeName: "Dhal Pakwan",
-    servings: "Serves 4",
+    servings: "4",
     description:
       "Crispy fried bread served with a flavorful chana dhal (split chickpea lentils) seasoned with cumin, turmeric, amchoor, and coriander.",
     ingredients: [
@@ -222,7 +222,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Soak the chana dhal for 4 hours. Drain and set aside. 2. Heat the oil in a saucepan. Add the cumin seeds. Let them splutter for 15 seconds. 3. Add the soaked dhal, water, salt and turmeric. Simmer for 30 minutes. 4. Transfer to a serving dish. Sprinkle with the amchoor and coriander leaves. Set aside. 5. Knead all the pakwan ingredients, except the oil, with enough water to make a stiff dough. 6. Divide into walnut-sized balls. Roll out into thick discs, 10cm/4in in diameter. Pierce all over with a fork. 7. Heat the oil in a frying pan. Deep fry the discs till golden. Drain on absorbent paper. 8. Serve the pakwans with the hot dhal.",
     estimatedTime: "90 minutes (plus soaking time)",
-    calories: " 350-400 per serving",
+    calories: " 350-400 ",
     nutritionalInfo: {
       protein: "15g",
       carbohydrates: "50g",
@@ -234,7 +234,7 @@ const RECIPES: Recipe[] = [
   {
     id: 7,
     recipeName: "Spicy Sev",
-    servings: "Serves 4",
+    servings: "4",
     description:
       "Gram flour flakes flavored with ajowan seeds, asafoetida, and salt, deep-fried to a crispy texture.",
     ingredients: [
@@ -248,7 +248,7 @@ const RECIPES: Recipe[] = [
     procedure:
       "1. Knead the besan with the ajowan seeds, oil, asafoetida, salt and water into a sticky dough. 2. Put the dough in a piping bag. 3. Heat the oil in a saucepan. Press the dough through the nozzle in the form of noodles into the pan and fry lightly on both sides. 4. Drain well and cool before storing. NOTE: This can be stored for a fortnight.",
     estimatedTime: "45 minutes",
-    calories: " 250-300 per serving",
+    calories: " 250-300 ",
     nutritionalInfo: {
       protein: "10g",
       carbohydrates: "30g",
@@ -302,7 +302,7 @@ export default function Home() {
       <SignedIn>
         <ScrollView
           ref={scrollViewRef}
-          className="bg-gray-950/90
+          className="bg-neutral-950/90
 flex-1  "
           contentContainerStyle={{ paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
@@ -313,7 +313,7 @@ flex-1  "
               <Text className="text-white text-2xl font-semibold mb-2">
                 Hello, {user?.firstName || "Chef"}! 👋
               </Text>
-              <Text className="text-gray-400 text-base mb-6">
+              <Text className="text-neutral-400 text-base mb-6">
                 What would you like to cook today?
               </Text>
             </View>
@@ -327,12 +327,12 @@ flex-1  "
               {mealTypes.map((type, index) => (
                 <TouchableOpacity
                   key={type.label}
-                  className={`bg-white/5 backdrop-blur-md rounded-2xl p-3 w-24 items-center ${
+                  className={`bg-white/15 backdrop-blur-md rounded-2xl p-3 w-24 items-center ${
                     index !== mealTypes.length - 1 ? "mr-3" : ""
                   }`}
                   activeOpacity={0.7}
                 >
-                  <View className="bg-white/10 p-2 rounded-full mb-2">
+                  <View className="bg-white/15 p-2 rounded-full mb-2">
                     <Ionicons name={type.icon} size={20} color="white" />
                   </View>
                   <Text className="text-white text-xs">{type.label}</Text>
@@ -347,7 +347,7 @@ flex-1  "
                   key={recipe.id}
                   onPress={() => toggleExpand(recipe.id)}
                   activeOpacity={0.7}
-                  className={`bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden ${
+                  className={`bg-white/15 backdrop-blur-md rounded-2xl overflow-hidden ${
                     expandedId === recipe.id ? "mb-6" : ""
                   }`}
                 >
@@ -400,7 +400,7 @@ flex-1  "
                           color="#9CA3AF"
                         />
                         <Text className="text-orange-400 text-sm ml-1">
-                          Serves{recipe.servings}
+                          Serves {recipe.servings}
                         </Text>
                       </View>
                     </View>

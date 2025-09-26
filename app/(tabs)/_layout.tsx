@@ -1,18 +1,19 @@
 import { Stack, Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 
 export default function TabLayout() {
   return (
     <>
       <SignedIn>
+        <StatusBar backgroundColor={"#E74C3C"} />
         <Tabs
           initialRouteName="index"
           screenOptions={{
             tabBarStyle: {
-              height: 100,
-              backgroundColor: "#0F172A",
+              height: 90,
+              backgroundColor: "#282828",
               borderTopWidth: 0,
               position: "absolute",
               bottom: 0,
@@ -22,14 +23,14 @@ export default function TabLayout() {
               shadowOpacity: 0,
             },
             tabBarItemStyle: {
-              paddingVertical: 8,
+              paddingVertical: 16,
             },
             tabBarShowLabel: false,
             tabBarActiveTintColor: "#FF6666",
-            tabBarInactiveTintColor: "#64748B",
+            tabBarInactiveTintColor: "#808080",
             headerShown: false,
             tabBarBackground: () => (
-              <View className="absolute inset-0 bg-gray-900/95 backdrop-blur-lg"></View>
+              <View className="absolute inset-0 bg-neutral-900/95 backdrop-blur-lg"></View>
             ),
           }}
         >
