@@ -29,8 +29,9 @@ export default function TabLayout() {
             tabBarActiveTintColor: "#FF6666",
             tabBarInactiveTintColor: "#808080",
             headerShown: false,
+
             tabBarBackground: () => (
-              <View className="absolute inset-0 bg-neutral-900/95 backdrop-blur-lg"></View>
+              <View className="absolute inset-0 bg-neutral-900/95 "></View>
             ),
           }}
         >
