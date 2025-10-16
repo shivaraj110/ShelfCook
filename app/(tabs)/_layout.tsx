@@ -1,11 +1,21 @@
-import { Stack, Tabs } from "expo-router";
+import { Stack, Tabs, useSegments } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
 import { useCameraContext } from "@/services/CameraContext";
 import { StatusBar, View } from "react-native";
+import { useEffect } from "react";
 
 export default function TabLayout() {
-  const { isCameraOpen } = useCameraContext();
+  const segments = useSegments();
+  const { isCameraOpen, setIsCameraOpen } = useCameraContext();
+  
+  // Close camera when navigating away from scan page
+  useEffect(() => {
+    const currentPage = segments[segments.length - 1];
+    if (currentPage !== 'scan' && isCameraOpen) {
+      setIsCameraOpen(false);
+    }
+  }, [segments, isCameraOpen, setIsCameraOpen]);
   return (
     <>
       <SignedIn>
