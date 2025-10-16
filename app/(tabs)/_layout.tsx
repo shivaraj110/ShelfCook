@@ -1,9 +1,11 @@
 import { Stack, Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
+import { useCameraContext } from "@/services/CameraContext";
 import { StatusBar, View } from "react-native";
 
 export default function TabLayout() {
+  const { isCameraOpen } = useCameraContext();
   return (
     <>
       <SignedIn>
@@ -12,6 +14,7 @@ export default function TabLayout() {
           initialRouteName="index"
           screenOptions={{
             tabBarStyle: {
+              display: isCameraOpen ? "none" : "flex",
               height: 90,
               backgroundColor: "#282828",
               borderTopWidth: 0,
