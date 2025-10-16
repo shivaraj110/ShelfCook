@@ -55,7 +55,7 @@ export default function Scan() {
   if (!permission) {
     return (
       <BackgroundWrapper>
-        <View className="flex-1 justify-center items-center p-6">
+        <View className="flex-1 bg-neutral-950/70 justify-center items-center p-6">
           <MaterialIcons name="camera-alt" size={64} color="white" />
           <Text className="text-white text-xl mt-4 text-center">
             Requesting camera permission...
@@ -68,7 +68,7 @@ export default function Scan() {
   if (!permission.granted) {
     return (
       <BackgroundWrapper>
-        <View className="flex-1 justify-center items-center p-6">
+        <View className="flex-1 justify-center bg-neutral-950/70 items-center p-6">
           <MaterialIcons name="no-photography" size={64} color="white" />
           <Text className="text-white text-xl mt-4 text-center">
             We need your permission to use the camera
@@ -88,24 +88,24 @@ export default function Scan() {
   if (selectedImage) {
     return (
       <BackgroundWrapper>
-        <View className="flex-1">
-          <View className="flex-1 relative">
+        <View className="flex-1 p-10">
+          <View className="flex-1 rounded-xl relative">
             <Image
               source={{ uri: selectedImage }}
-              className="w-full h-full"
+              className="w-full h-full "
               resizeMode="contain"
+              borderRadius={20}
             />
-            <View className="absolute bottom-0 left-0 right-0 p-6 bg-black/50 backdrop-blur-lg">
-              <TouchableOpacity
-                onPress={handleClear}
-                className="bg-blue-500/80 backdrop-blur-md w-full py-4 rounded-2xl flex-row justify-center items-center"
-              >
+            <TouchableOpacity
+              onPress={handleClear}
+              className="bg-gradient-to-r bottom-[20%] from-blue-500/80 to-blue-600/80 backdrop-blur-xl w-full py-5 rounded-2xl flex-row items-center justify-center shadow-lg"
+              activeOpacity={0.7}
+            >
+              <View className="bg-white/20 rounded-xl p-2 mr-3">
                 <Ionicons name="camera-reverse" size={24} color="white" />
-                <Text className="text-white text-lg ml-2">
-                  Choose Another Image
-                </Text>
-              </TouchableOpacity>
-            </View>
+              </View>
+              <Text className="text-white text-lg  font-medium">Cancel</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </BackgroundWrapper>
@@ -117,24 +117,27 @@ export default function Scan() {
       <BackgroundWrapper>
         <View style={styles.container}>
           <CameraView ref={cameraRef} facing="back" style={styles.camera}>
-            <View className="absolute bottom-10 w-full flex flex-row items-center justify-center gap-x-8">
+            <View className="absolute bottom-10 w-full flex flex-row items-center justify-center gap-x-6">
               <TouchableOpacity
                 onPress={() => setIsCameraOpen(false)}
-                className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-lg flex items-center justify-center"
+                className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center shadow-lg"
+                activeOpacity={0.7}
               >
-                <Ionicons name="close" size={32} color="white" />
+                <Ionicons name="close" size={28} color="white" />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={takePicture}
-                className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-lg p-2"
+                className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500/80 to-blue-600/80 backdrop-blur-xl p-2 shadow-lg border-4 border-white/20"
+                activeOpacity={0.7}
               >
-                <View className="w-full h-full rounded-full bg-white" />
+                <View className="w-full h-full rounded-full bg-white shadow-inner" />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {}}
-                className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-lg flex items-center justify-center"
+                className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center shadow-lg"
+                activeOpacity={0.7}
               >
-                <Ionicons name="camera-reverse" size={32} color="white" />
+                <Ionicons name="camera-reverse" size={28} color="white" />
               </TouchableOpacity>
             </View>
           </CameraView>
@@ -145,29 +148,41 @@ export default function Scan() {
 
   return (
     <BackgroundWrapper>
-      <View className="flex-1 justify-center items-center p-6">
-        <View className="w-full max-w-sm space-y-6">
-          <Text className="text-white text-3xl font-bold text-center mb-8">
+      <View className="flex-1 justify-center items-center p-6 bg-neutral-950/70 ">
+        <View className="w-full max-w-sm">
+          <Text className="text-white text-4xl font-bold text-center mb-4">
             Scan Ingredients
           </Text>
-          <TouchableOpacity
-            onPress={openCamera}
-            className="bg-blue-500/80 backdrop-blur-md w-full py-4 rounded-2xl flex-row items-center justify-center"
-          >
-            <MaterialIcons name="camera-alt" size={24} color="white" />
-            <Text className="text-white text-lg ml-2">Take Photo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={pickImage}
-            className="bg-blue-500/80 backdrop-blur-md w-full py-4 rounded-2xl flex-row items-center justify-center"
-          >
-            <MaterialIcons name="photo-library" size={24} color="white" />
-            <Text className="text-white text-lg ml-2">Choose from Gallery</Text>
-          </TouchableOpacity>
-          <Text className="text-white/60 text-center mt-4">
+          <Text className="text-white/60 text-center mb-12 text-lg">
             Take a photo or choose an image of ingredients to find matching
             recipes
           </Text>
+
+          <View className="space-y-4">
+            <TouchableOpacity
+              onPress={openCamera}
+              className="bg-gradient-to-r from-blue-500/80 to-blue-600/80 backdrop-blur-xl w-full py-5 rounded-2xl flex-row items-center justify-center shadow-lg"
+              activeOpacity={0.7}
+            >
+              <View className="bg-white/20 rounded-xl p-2 mr-3">
+                <MaterialIcons name="camera-alt" size={24} color="white" />
+              </View>
+              <Text className="text-white text-lg font-medium">Take Photo</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={pickImage}
+              className="bg-white/10 backdrop-blur-xl border border-white/20 w-full py-5 rounded-2xl flex-row items-center justify-center shadow-lg"
+              activeOpacity={0.7}
+            >
+              <View className="bg-white/10 rounded-xl p-2 mr-3">
+                <MaterialIcons name="photo-library" size={24} color="white" />
+              </View>
+              <Text className="text-white text-lg font-medium">
+                Choose from Gallery
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </BackgroundWrapper>
