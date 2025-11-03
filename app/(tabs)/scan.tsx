@@ -1,23 +1,33 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
 import { BackgroundWrapper } from "@/app/components/BackgroundWrapper";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { useRef, useState } from "react";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useCameraContext } from "@/services/CameraContext";
+import { getIngredients } from "@/services/getIngredients";
 
 export default function Scan() {
   const [permission, requestPermission] = useCameraPermissions();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [ingredients, setIngredients] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { isCameraOpen, setIsCameraOpen } = useCameraContext();
   const cameraRef = useRef<any>(null);
+
+  const handleProceed = async () => {
+    if (!selectedImage) return;
+    
+    setIsLoading(true);
+    try {
+      const identified = await getIngredients(selectedImage);
+      setIngredients(identified);
+    } catch (error) {
+      console.error("Error getting ingredients:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleClear = () => {
     setSelectedImage(null);
@@ -92,20 +102,54 @@ export default function Scan() {
           <View className="flex-1 rounded-xl relative">
             <Image
               source={{ uri: selectedImage }}
-              className="w-full h-full "
+              className="w-full h-full"
               resizeMode="contain"
               borderRadius={20}
             />
-            <TouchableOpacity
-              onPress={handleClear}
-              className="bg-gradient-to-r bottom-[20%] from-blue-500/80 to-blue-600/80 backdrop-blur-xl w-full py-5 rounded-2xl flex-row items-center justify-center shadow-lg"
-              activeOpacity={0.7}
-            >
-              <View className="bg-white/20 rounded-xl p-2 mr-3">
-                <Ionicons name="camera-reverse" size={24} color="white" />
+            
+            {ingredients.length > 0 ? (
+              <View className="absolute top-0 right-0 left-0 bg-black/50 backdrop-blur-sm p-6 rounded-t-2xl">
+                <Text className="text-white font-medium text-lg mb-2">Identified Ingredients:</Text>
+                <View className="flex-row flex-wrap gap-2">
+                  {ingredients.map((ingredient, index) => (
+                    <View key={index} className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                      <Text className="text-white">{ingredient}</Text>
+                    </View>
+                  ))}
+                </View>
               </View>
-              <Text className="text-white text-lg  font-medium">Cancel</Text>
-            </TouchableOpacity>
+            ) : null}
+
+            <View className="flex-row space-x-4 bottom-[20%]">
+              <TouchableOpacity
+                onPress={handleClear}
+                className="flex-1 bg-white/10 backdrop-blur-xl border border-white/20 py-5 rounded-2xl flex-row items-center justify-center shadow-lg"
+                activeOpacity={0.7}
+              >
+                <View className="bg-white/20 rounded-xl p-2 mr-3">
+                  <Ionicons name="close" size={24} color="white" />
+                </View>
+                <Text className="text-white text-lg font-medium">Cancel</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                onPress={handleProceed}
+                disabled={isLoading}
+                className="flex-1 bg-gradient-to-r from-blue-500/80 to-blue-600/80 backdrop-blur-xl py-5 rounded-2xl flex-row items-center justify-center shadow-lg"
+                activeOpacity={0.7}
+              >
+                {isLoading ? (
+                  <ActivityIndicator color="white" style={{ marginRight: 12 }} />
+                ) : (
+                  <View className="bg-white/20 rounded-xl p-2 mr-3">
+                    <Ionicons name="arrow-forward" size={24} color="white" />
+                  </View>
+                )}
+                <Text className="text-white text-lg font-medium">
+                  {isLoading ? "Processing..." : "Proceed"}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </BackgroundWrapper>
